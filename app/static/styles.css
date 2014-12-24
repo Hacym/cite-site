@@ -2,6 +2,7 @@ body {
 	background-color: #2A3140;
 	margin-top: 0px;
 	padding-top: 0px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /* Layout */
@@ -14,8 +15,8 @@ body {
 
 #header {
 	width: 100%;
-	background-color: #F24957;
 	padding-top: 3px;
+	background-color: #F24957;
 	-webkit-border-bottom-right-radius: 15px;
 	-webkit-border-bottom-left-radius: 15px;
 	-moz-border-radius-bottomright: 15px;
@@ -25,26 +26,32 @@ body {
 }
 
 #content {
-position: relative;
-width: 100%;
-padding: 0px;
-background: #FFFFFF;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
+	position: relative;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #FFFFFF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 #content:after {
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 34px 20px 0;
-border-color: #FFFFFF transparent;
-display: block;
-width: 0;
-z-index: 1;
-bottom: -34px;
-left: 75%;
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 34px 20px 0;
+	border-color: #FFFFFF transparent;
+	display: block;
+	width: 0;
+	z-index: 1;
+	bottom: -34px;
+	left: 90%;
+}
+
+#footer {
+	width: 100%;
+	text-align: center;
 }
 
 /* Text Styles */
@@ -52,10 +59,43 @@ left: 75%;
 #header h1 {
 	padding: 3px;
 	margin: 3px;
-	font-family: 'Open Sans', sans-serif;
 	color: #FFFFFF;
 }
 
-#content p {
-	padding: 10px;
+#content .header {
+	font-size: 15px;
+	margin-bottom: 0px;
+	margin-left: 25px;
+	margin-right: 25px;
+	font-weight: bold;
 }
+
+#content .text {
+	font-size: 10px;
+	margin-top: 2px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+#content form {
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+#content label {
+	font-size: 15px;
+	margin-bottom: 0px;
+	font-weight: bold;
+}
+
+#content table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 85%;
+}
+
+#footer p, #footer a {
+	color: #FFFFFF;
+	font-size: 10px;
+}
+
