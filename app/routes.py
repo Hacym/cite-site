@@ -1,7 +1,7 @@
 from app import app
-from flask import render_template, request, send_file, url_for
+from flask import render_template, request, url_for
 from PIL import Image, ImageDraw, ImageFont
-import glob, os
+import os, base64
 
 # Index
 @app.route("/", methods=['GET', 'POST'])
@@ -31,7 +31,8 @@ def index():
         # Create our draw object
         draw = ImageDraw.Draw(image)
         
-        position = (10, 10) # Positioned in the top left for now
+        # Positioned in the top left for now
+        position = (10, 10)
         
         # Draw the text
         draw.text(position, quote, font=font, fill=(0, 0, 0, 255))
@@ -42,15 +43,22 @@ def index():
         # Save our image
         image.save('app/static/quote.PNG')
         
+        # Open it back up...
+        imgfile = open('app/static/quote.PNG')
+        
+        # Encode it as base64 for use in the template (cache issue resolved)
+        imagesrc = base64.b64encode(imgfile.read())
+        
         # A return to tell our template to display the image
         display = True
     else:
         # Don't display
         display = False
+        imagesrc = False
     
     # Our list of fonts. 
     # These fonts have to be TTF!!
     fonts = [font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]
         
     
-    return render_template('index.html', fonts = fonts, display = display)
+    return render_template('index.html', fonts = fonts, display = display, imagesrc = imagesrc)

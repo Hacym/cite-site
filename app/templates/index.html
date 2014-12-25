@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 	<title>Quotes</title>
 	<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -67,7 +68,7 @@
 			</form>
 			{% if display == True -%}
 				<p class="header">Your image:</p>
-				<p><img src="{{url_for('static', filename='quote.png')}}"></p>
+				<p><img src="data:image/png;base64, {{imagesrc}}"></p>
 			{% endif -%}
 		</div>
 		<div id="footer">
