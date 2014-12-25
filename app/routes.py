@@ -49,15 +49,8 @@ def index():
         display = False
     
     # Our list of fonts. 
-    fonts = []
-    
-    # Loop over all of the fonts in our fonts folder and add it to our fonts list
     # These fonts have to be TTF!!
-    for font in glob.glob('app/static/fonts/*.ttf'):
-        # Appends just the name of the file to the list
-        # os.path.basename removes the path to the file
-        # [:-4] removes the .ttf ext
-        fonts.append(os.path.basename(font[:-4]))
+    fonts = [font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]
         
     
     return render_template('index.html', fonts = fonts, display = display)
