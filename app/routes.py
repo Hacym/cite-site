@@ -1,13 +1,14 @@
 from app import app
-from flask import render_template, request, send_file
-from PIL import Image, ImageDraw
+from flask import render_template, request, send_file, url_for
+from PIL import Image, ImageDraw, ImageFont
+import glob, os
 
 # Index
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         # Create our variables from our form
-        font = request.form['font']
+        font = ImageFont.truetype('app/static/fonts/'+request.form['font']+'.ttf', 15)
         
         # Breaking out our colors into RGB to use in Pillow --
         # this is done with Javascript on the template side
@@ -33,7 +34,7 @@ def index():
         position = (10, 10) # Positioned in the top left for now
         
         # Draw the text
-        draw.text(position, quote, fill=(0, 0, 0, 255))
+        draw.text(position, quote, font=font, fill=(0, 0, 0, 255))
         
         # Bye bye draw instance
         del draw
@@ -47,8 +48,16 @@ def index():
         # Don't display
         display = False
     
-    # Our list of fonts. These are going to change, and we'll have to find 
-    # a way to do this progomatically instead, since the font file has to 
-    # be in the folder with the script.
-    fonts = ('Arial', 'Courier New', 'Verdana', 'Times New Roman')
+    # Our list of fonts. 
+    fonts = []
+    
+    # Loop over all of the fonts in our fonts folder and add it to our fonts list
+    # These fonts have to be TTF!!
+    for font in glob.glob('app/static/fonts/*.ttf'):
+        # Appends just the name of the file to the list
+        # os.path.basename removes the path to the file
+        # [:-4] removes the .ttf ext
+        fonts.append(os.path.basename(font[:-4]))
+        
+    
     return render_template('index.html', fonts = fonts, display = display)
