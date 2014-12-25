@@ -12,7 +12,7 @@
 		<div id="header">
 			<h1>Quotes</h1>
 		</div>
-		<div style="clear:both;">
+		<div style="clear:both;"></div>
 		<div id="content">
 			<p class="header">Instructions:</p>
 			<p class="text">Insert the quote you want to generate an image for. Then, change the settings to your liking. Finally, click the generate button to generate your image. It can then be saved to your desktop.</p>
@@ -38,19 +38,26 @@
 							<input class="color" name="bgcolor">
 						<td>
 							<label for="quotemarks">Show quotation marks?</label>
-							<input type="checkbox" name="quotemarks" value="True">
+							<select name="quotemarks">
+								<option value="True">Yes</option>
+								<option value="False">No</option>
+							</select>
 						</td>
 					</tr>
 				</table>
 				<p style="text-align: right;"><input type="submit" value="Submit"></p>
 			</form>
+			{% if display == True -%}
+				<p class="header">Your image:</p>
+				<p><img src="{{url_for('static', filename='quote.png')}}"></p>
+			{% endif -%}
 		</div>
-	</div>
-	<div id="footer">
-		<p class="nav">
-			Home | Documentation | GitHub
-		</p>
-		<p><a href="https://github.com/Hacym/quote/" target="_blank"><img src="{{url_for('static', filename='github.png')}}" alt="GitHub"><br />Fork me on GitHub</a></p>
+		<div id="footer">
+			<p class="nav">
+				Home | Documentation | GitHub
+			</p>
+			<p><a href="https://github.com/Hacym/quote/" target="_blank"><img src="{{url_for('static', filename='github.png')}}" alt="GitHub"><br />Fork me on GitHub</a></p>
+		</div>
 	</div>
 </body>
 </html>
