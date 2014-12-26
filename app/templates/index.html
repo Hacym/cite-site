@@ -62,13 +62,21 @@
 								<option value="False">No</option>
 							</select>
 						</td>
+						<td>
+							<label for="height">Height:</label>
+							<input type="number" name="height" value="200"><br />
+							<label for="width">Width:</label>
+							<input type="number" name="width" value="300">
+						</td>
 					</tr>
 				</table>
 				<p style="text-align: right;"><input type="submit" value="Submit"></p>
 			</form>
 			{% if display == True -%}
 				<p class="header">Your image:</p>
-				<p><img src="data:image/png;base64, {{imagesrc}}"></p>
+				<div id="image">
+					<p><img src="data:image/png;base64, {{imagesrc}}"></p>
+				</div>
 			{% endif -%}
 		</div>
 		<div id="footer">

@@ -12,20 +12,22 @@ def index():
         
         # Breaking out our colors into RGB to use in Pillow --
         # this is done with Javascript on the template side
-        fontcolor_r = request.form["font-r"]
-        fontcolor_g = request.form["font-g"]
-        fontcolor_b = request.form["font-b"]
+        fontcolor_r = request.form['font-r']
+        fontcolor_g = request.form['font-g']
+        fontcolor_b = request.form['font-b']
         
-        bgcolor_r = request.form["bg-r"]
-        bgcolor_g = request.form["bg-g"]
-        bgcolor_b = request.form["bg-b"]
+        bgcolor_r = request.form['bg-r']
+        bgcolor_g = request.form['bg-g']
+        bgcolor_b = request.form['bg-b']
         
         quote = request.form['quote']
         quotemarks = request.form['quotemarks']
         
-        # For now, our size is gonna be nice and simple: 300px wide, 200px tall
-        # Eventually we can make it do more advanced stuff, like custom image sizes
-        size = (300, 200)
+        height = int(request.form['height'])
+        width = int(request.form['width'])
+        
+        # Custom image height and width
+        size = (width, height)
         image = Image.new('RGB', size, (255, 255, 255, 0)) # Create our instance of the image class from Pillow
         
         # Create our draw object
@@ -36,6 +38,12 @@ def index():
         
         # Draw the text
         draw.text(position, quote, font=font, fill=(0, 0, 0, 255))
+        
+        if quotemarks == "True":
+            # Just a default position now, can make it do something more advanced later (should appear in bottom right hand corner)
+            position = (width - 75, height - 75)
+            font = ImageFont.truetype('app/static/fonts/'+request.form['font']+'.ttf', 125)
+            draw.text(position, '"', font=font, fill=(0, 0, 0, 255))
         
         # Bye bye draw instance
         del draw
