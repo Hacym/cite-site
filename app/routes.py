@@ -23,8 +23,11 @@ def index():
         quote = request.form['quote']
         quotemarks = request.form['quotemarks']
         
+        # Must make these an int because for some stupid reason a number input type comes in as a string.
         height = int(request.form['height'])
         width = int(request.form['width'])
+        
+        attribution = "- " + request.form['attribution']
         
         # Custom image height and width
         size = (width, height)
@@ -38,6 +41,12 @@ def index():
         
         # Draw the text
         draw.text(position, quote, font=font, fill=(0, 0, 0, 255))
+        
+        # Set our new position for the attribution
+        position = (10, height - 50)
+        
+        # Put the quote attribution on the image
+        draw.text(position, attribution, font = font, fill=(0, 0, 0, 255))
         
         if quotemarks == "True":
             # Just a default position now, can make it do something more advanced later (should appear in bottom right hand corner)
