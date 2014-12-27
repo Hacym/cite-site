@@ -2,6 +2,8 @@
 def create_image(request):
     from PIL import Image, ImageDraw, ImageFont
     
+    
+    # Set our font and image sizes
     if request['size'] == "small":
         size = (300, 200)
         attrposition = (10, 150)
@@ -27,7 +29,7 @@ def create_image(request):
         quotemarksize = 1000
         fontsize = 120
         
-    # Make our font object
+    # Make our font object for use with the quote and attribution text
     font = ImageFont.truetype('app/static/fonts/'+request['font']+'.ttf', fontsize)
     
     # Create our instance of the image class from Pillow

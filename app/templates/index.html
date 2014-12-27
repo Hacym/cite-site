@@ -27,6 +27,9 @@
 		</div>
 		<div style="clear:both;"></div>
 		<div id="content">
+			{% if error != False -%}
+				<p style="color: red; text-align: center;">{{error}}</p>
+			{% endif -%}
 			<p class="header">Instructions:</p>
 			<p class="text">Insert the quote you want to generate an image for. Then, change the settings to your liking. Finally, click the generate button to generate your image. It can then be saved to your desktop.</p>
 			<form action="" method="post">

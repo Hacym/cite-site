@@ -6,27 +6,34 @@ import os, base64
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        from functions import create_image
+        if len(request.form['quote']) > 255 or not request.form['quote']:
+            error = "Please make sure your quote is less than or equal to 255 charaters or is not blank."
+            display = False
+            imagesrc = False
+        else:
+            error = False
+            from functions import create_image
         
-        # create_image function from functions.py, pass it the entire request form object.
-        # This function creates our image for us
-        create_image(request.form)
+            # create_image function from functions.py, pass it the entire request form object.
+            # This function creates our image for us
+            create_image(request.form)
         
-        # We need to open the image back up so that it can be encoded
-        imgfile = open('app/static/quote.PNG')
+            # We need to open the image back up so that it can be encoded
+            imgfile = open('app/static/quote.PNG')
         
-        # Encode it as base64 for use in the template (cache issue resolved)
-        imagesrc = base64.b64encode(imgfile.read())
+            # Encode it as base64 for use in the template (cache issue resolved)
+            imagesrc = base64.b64encode(imgfile.read())
         
-        # A return to tell our template to display the image
-        display = True
+            # A return to tell our template to display the image
+            display = True
     else:
         # Don't display
         display = False
         imagesrc = False
+        error = False
     
     # Our list of fonts. 
     # These fonts have to be TTF!!
     fonts = [font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]
     
-    return render_template('index.html', fonts = fonts, display = display, imagesrc = imagesrc)
+    return render_template('index.html', fonts = fonts, display = display, imagesrc = imagesrc, error = error)
