@@ -102,6 +102,10 @@ body {
 	width: 100%;
 }
 
+#content td {
+	vertical-align: top;
+}
+
 #footer p, #footer a {
 	color: #FFFFFF;
 	font-size: 10px;

@@ -12,9 +12,9 @@ def index():
             imagesrc = False
         else:
             error = False
-            from functions import create_image
-        
+            
             # create_image function from functions.py, pass it the entire request form object.
+            from functions import create_image
             # This function creates our image for us
             create_image(request.form)
         
