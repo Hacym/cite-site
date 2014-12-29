@@ -24,8 +24,8 @@ def create_image(request):
     # Set our font and image sizes
     if request['size'] == "small":
         size = (300, 200)
-        attrposition = (10, 150)
-        quotemarkposition = (250, 125)
+        attrposition = (10, 180)
+        quotemarkposition = (250, 120)
         quotemarksize = 125
         fontsize = 15
     elif request['size'] == "medium":
