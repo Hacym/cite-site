@@ -40,6 +40,7 @@ def index():
         return "FATAL ERROR: NO FONTS FOUND."
     
     # Check to see if there are any logo files.
+    # Logo files must be stored as .png files in app/static/logos
     if len([file for file in os.listdir('app/static/logos/') if os.path.isfile(name)]) > 0:
         logos = [logos.rstrip('.png') for file in os.listdir('app/static/logos') if font.endswith('.png')]
     else: 
