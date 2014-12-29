@@ -104,7 +104,12 @@
 				<div id="image">
 					<p><img src="data:image/png;base64, {{imagesrc}}"></p>
 				</div>
+			{% else %}
+				<p class="header">Preview:</p>
+				<div id="image">
+				</div>
 			{% endif -%}
+			
 		</div>
 		<div id="footer">
 			<p class="nav">
