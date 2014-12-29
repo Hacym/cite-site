@@ -29,12 +29,9 @@
 		</div>
 		<div style="clear:both;"></div>
 		<div id="content">
-			{% if error != False -%}
-				<p style="color: red; text-align: center;">{{error}}</p>
-			{% endif -%}
 			<p class="header">Instructions:</p>
 			<p class="text">Insert the quote you want to generate an image for. Then, change the settings to your liking. Finally, click the generate button to generate your image. It can then be saved to your desktop.</p>
-			<form action="" method="post">
+			<form method="post" id="form">
 				<label for="quote">Quote:</label><span style="font-size: 8px; font-style: italic;"> Max 255 characters</span>
 				<textarea name="quote" style="width: 100%; height: 100px;"></textarea>
 				<label for="attribution">Attribution:</label><br />
@@ -99,12 +96,10 @@
 				</table>
 				<p style="text-align: right;"><input type="submit" value="Submit"></p>
 			</form>
-			{% if display == True -%}
-				<p class="header">Your image:</p>
-				<div id="image">
-					<p><img src="data:image/png;base64, {{imagesrc}}"></p>
-				</div>
-			{% endif %}
+			<p class="header">Your image:</p>
+			<div id="image">
+				<p><img id="previewimage"></p>
+			</div>
 			
 		</div>
 		<div id="footer">

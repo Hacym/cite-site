@@ -14,4 +14,11 @@ $(document).ready(function(){
             $(".imagefile").hide();
         }
     });
+    
+    $("form").on('input change', ':input', function(event) {
+    
+        $.post('create_image', $("#form").serialize()).done(function(response) {
+            $("#previewimage").attr("src", response)
+        });
+    });
 });
