@@ -24,15 +24,20 @@ def index():
     
 @app.route("/create_image", methods=['POST', 'GET'])
 def create_image():
-    # create_image function from functions.py, pass it the entire request form object.
-    from functions import create_image
-    # This function creates our image for us
-    create_image(request.form)
+    from functions import create_image, TextLengthError, NoTextError
+    try:
+        # create_image function from functions.py, pass it the entire request form object.
+        # This function creates our image for us
+        create_image(request.form)
     
-    # We need to open the image back up so that it can be encoded
-    imgfile = open('app/static/quote.PNG')
+        # We need to open the image back up so that it can be encoded
+        imgfile = open('app/static/quote.PNG')
+    
+        # Encode it as base64 for use in the template (cache issue resolved)
+        imagesrc = "data:image/png;base64, " + base64.b64encode(imgfile.read())
         
-    # Encode it as base64 for use in the template (cache issue resolved)
-    imagesrc = "data:image/png;base64, " + base64.b64encode(imgfile.read())
-    
-    return imagesrc
+        return imagesrc
+    except TextLengthError as e:
+        return e.value, 406
+    except NoTextError as e:
+        return e.value, 406

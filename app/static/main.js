@@ -16,9 +16,20 @@ $(document).ready(function(){
     });
     
     $("form").on('input change', ':input', function(event) {
-    
-        $.post('create_image', $("#form").serialize()).done(function(response) {
-            $("#previewimage").attr("src", response)
+        $.ajax({
+            type: "POST",
+            url: "create_image",
+            data: $("#form").serialize(),
+            success: function(msg){
+                $("#error").hide();
+                $("#image").show();
+                $("#previewimage").attr("src", msg);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {                
+                $("#image").hide();
+                $("#error").show();
+                $("#error").html(XMLHttpRequest.responseText);
+            }
         });
     });
 });

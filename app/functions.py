@@ -1,6 +1,25 @@
 # Create image function -- pass the entire request form object to it.
+class TextLengthError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+        
+class NoTextError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 def create_image(request):
+    
     from PIL import Image, ImageDraw, ImageFont
+    
+    if len(request['quote']) > 255:
+        raise TextLengthError("The length of a quote cannot exceed 255 characters.")
+    
+    if not request['quote']:
+        raise NoTextError("Your quote cannot be empty.")
     
     # Set our font and image sizes
     if request['size'] == "small":
