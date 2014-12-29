@@ -34,8 +34,12 @@ def index():
     
     # Our list of fonts. 
     # These fonts have to be TTF!!
-    fonts = [font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]
+    if len([font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]) > 0:
+        fonts = [font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]
+    else:
+        return "FATAL ERROR: NO FONTS FOUND."
     
+    # Check to see if there are any logo files.
     if len([file for file in os.listdir('app/static/logos/') if os.path.isfile(name)]) > 0:
         logos = [logos.rstrip('.png') for file in os.listdir('app/static/logos') if font.endswith('.png')]
     else: 
