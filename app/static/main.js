@@ -32,4 +32,8 @@ $(document).ready(function(){
             }
         });
     });
+    
+    $("#clear").click(function(){
+        $("#image").hide();
+    });
 });
