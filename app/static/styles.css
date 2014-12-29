@@ -107,3 +107,11 @@ body {
 	font-size: 10px;
 }
 
+.logo {
+	display: none;
+}
+
+.imagefile {
+	display: none;
+}
+

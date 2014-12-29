@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, url_for
-import os, base64
+import os, os.path, base64
 
 # Index
 @app.route("/", methods=['GET', 'POST'])
@@ -36,4 +36,9 @@ def index():
     # These fonts have to be TTF!!
     fonts = [font.rstrip('.ttf') for font in os.listdir('app/static/fonts') if font.endswith('.ttf')]
     
-    return render_template('index.html', fonts = fonts, display = display, imagesrc = imagesrc, error = error)
+    if len([file for file in os.listdir('app/static/logos/') if os.path.isfile(name)]) > 0:
+        logos = [logos.rstrip('.png') for file in os.listdir('app/static/logos') if font.endswith('.png')]
+    else: 
+        logos = False
+    
+    return render_template('index.html', fonts = fonts, logos = logos, display = display, imagesrc = imagesrc, error = error)

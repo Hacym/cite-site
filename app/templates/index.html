@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="{{url_for('static', filename='jscolor/jscolor.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='jquery.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
 	<script type="text/javascript">
 		function updateFont(color) {
 			document.getElementById('font-r').value = color.rgb[0] * 100 +"%";
@@ -60,12 +62,29 @@
 							<input type="hidden" id="bg-r" name="bg-r" value="0%">
 							<input type="hidden" id="bg-g" name="bg-g" value="0%">
 							<input type="hidden" id="bg-b" name="bg-b" value="0%">
-						<td>
+						<td style="width: 250px;">
 							<label for="quotemarks">Show quotation marks?</label>
-							<select name="quotemarks">
+							<select name="quotemarks" class="quotemarks">
 								<option value="True">Yes</option>
 								<option value="False">No</option>
 							</select>
+							<br />
+							<label for="logo" class="logo">Show a logo?</label>
+							<select name="logo" class="logo">
+								<option value="False">No</option>
+								<option value="True">Yes</option>
+							</select>
+							<br />
+							{% if logos != False %}
+								<label for="imagefile" class="imagefile">Choose a logo:</label>
+								<select name="imagefile" class="imagefile">
+									{% for logo in logos %}
+										<option value="{{logo}}">{{logo}}</option>
+									{% endfor %}
+								</select>
+							{% else %}
+								<span class="imagefile" style="color:red;">No logos were found. Please place logo files in app/static/logos as png files.</span>
+							{% endif %}
 						</td>
 						<td>
 							<label for="size">Size:</label>
